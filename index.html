@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Restful API</title>
+	<script src="https://code.jquery.com/jquery-3.2.1.js" integrity="
+	sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous">
+	</script>
+	<style>
+		#container
+		{
+			margin: 3px;
+		}
+	</style>
+	<script>
+		window.onload = function()
+		{
+			var URL = "http://www.flysfo.com/api/airlines.json?limit=20&key=YOUR_API_KEY";
+			 
+			$.ajax({
+				dataType: "json",
+				url: URL,
+				success: success
+			});
+
+			function success(e)
+			{
+				var result = "";
+				$.each(e, function(index, value)
+				{
+					result += "<p><img src='" + value.image + "' /></p>";
+					result += "<h3>" + value.title + "</h3>";
+					result += "<p>" + value.phone + "</p>";
+					result += value.body;
+					result += "<div style='border-bottom: 1px solid black;'></div>"
+				});
+				$('#result').html(result);
+			}
+		}
+	</script>
+</head>
+<body>
+	<div id="container">
+		<h1>Airlines At SFO</h1>
+		<div id="result"></div>
+	</div>
+</body>
+</html>
+
